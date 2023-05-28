@@ -1,7 +1,0 @@
-app:
-  name: "home-iot"
-  version: "0.0.1"
-HttpServer:
-  Port: ":5000"
-logger:
-  level: "debug"

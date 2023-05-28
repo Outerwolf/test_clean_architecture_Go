@@ -1,0 +1,7 @@
+app:
+  name: ""
+  version: ""
+HttpServer:
+  Port: ""
+logger:
+  level: ""
