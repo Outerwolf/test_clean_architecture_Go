@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/auth/src/auth"
 	"github.com/auth/src/boot"
+	"github.com/auth/src/boot/routes"
 	"github.com/auth/src/config"
+	"github.com/auth/src/security"
 	"go.uber.org/fx"
 )
 
@@ -17,14 +18,13 @@ func newFxApp() *fx.App {
 		fx.Provide(
 			config.NewConfigBuilder,
 			config.NewConfiguration,
-			boot.CreateHTTPGinServer,
 		),
-		auth.AuthModule(),
+		boot.CommonModules(),
+		security.SecurityModule(),
 
-		//
 		fx.Invoke(
-			boot.RegisterHealthCheck,
-			boot.StartHttpGinServer,
+			routes.SetRoutes,
+			boot.StartHttpServer,
 		),
 	)
 }

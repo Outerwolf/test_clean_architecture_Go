@@ -14,3 +14,7 @@ func CreateHTTPGinServer() *gin.Engine {
 func StartHttpGinServer(configuration *config.Configuration, mux *gin.Engine) {
 	http.ListenAndServe(configuration.HttpServer.Port, mux)
 }
+
+func StartHttpServer(cfg *config.Configuration, router *Router) {
+	router.Run(":" + cfg.HttpServer.Port)
+}

@@ -526,4 +526,7 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# Configuration Files
+configuration
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,go,visualstudio,visualstudiocode
