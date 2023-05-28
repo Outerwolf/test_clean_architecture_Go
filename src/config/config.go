@@ -3,12 +3,6 @@ package config
 import (
 	"fmt"
 	"github.com/spf13/viper"
-	"os"
-)
-
-const (
-	KEY_ENV    = "GO_ENV"
-	defaultEnv = "Local"
 )
 
 type ConfigBuilder struct {
@@ -28,15 +22,6 @@ func (cb ConfigBuilder) WithConfigType(configType string) ConfigBuilder {
 
 func (cb ConfigBuilder) WithBasePath(basePath string) ConfigBuilder {
 	cb.basePath = basePath
-	return cb
-}
-
-func (cb ConfigBuilder) WithViper(viper *viper.Viper) ConfigBuilder {
-
-	err := cb.viper.MergeConfigMap(viper.AllSettings())
-	if err != nil {
-		panic(err)
-	}
 	return cb
 }
 
@@ -62,27 +47,12 @@ func (cb ConfigBuilder) WithConfigFile(filePath string, optional bool) ConfigBui
 	return cb
 }
 
-func (cb ConfigBuilder) WithSnapshot(filePath string) ConfigBuilder {
-	err := cb.viper.WriteConfigAs(filePath)
-	if err != nil {
-		panic(err)
-	}
-
-	return cb
-}
-
 func (cb ConfigBuilder) Build() *viper.Viper {
 	return cb.viper
 }
 
 func NewConfigBuilder() *viper.Viper {
-	var environment string
-	// read environment variable
-	if env, ok := os.LookupEnv(KEY_ENV); ok {
-		environment = env
-	} else {
-		environment = defaultEnv
-	}
+	var environment string = "Local"
 
 	return NewViperBuilder().
 		WithConfigType("yaml").
