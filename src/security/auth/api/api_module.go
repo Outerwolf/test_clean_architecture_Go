@@ -11,6 +11,5 @@ func ApiModule() fx.Option {
 			auth_controller.NewAuthController,
 			auth_controller.NewAuthRoutes,
 		),
-		// fx.Provide(auth_controller.NewAuthRoutes),
 	)
 }

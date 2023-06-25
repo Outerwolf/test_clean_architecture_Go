@@ -19,9 +19,12 @@ func (ac *AuthController) SignUp(c *gin.Context) {
 	var request SignUpRequest
 
 	id := c.Param("id")
-
-	println(id)
-
+	if id == "" {
+		c.JSON(400, gin.H{
+			"message": "Bad request",
+		})
+		return
+	}
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(400, gin.H{
 			"message": "Bad request",
@@ -29,6 +32,7 @@ func (ac *AuthController) SignUp(c *gin.Context) {
 		return
 	}
 	request.Id = id
+
 	ac.signUpUseCase.Execute(request)
 	c.JSON(200, gin.H{
 		"message": "From Sign UP",
