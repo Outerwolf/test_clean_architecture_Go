@@ -14,5 +14,8 @@ import (
 //}
 
 func StartHttpServer(cfg *config.Configuration, router *Router) {
-	router.Run(":" + cfg.HttpServer.Port)
+	err := router.Run(":" + cfg.HttpServer.Port)
+	if err != nil {
+		return
+	}
 }

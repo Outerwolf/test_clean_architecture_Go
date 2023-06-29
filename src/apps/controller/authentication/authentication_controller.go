@@ -25,7 +25,10 @@ func (ac *AuthController) SignUp(c *gin.Context) {
 		return
 	}
 
-	ac.signUpUseCase.Execute(data)
+	err := ac.signUpUseCase.Execute(data)
+	if err != nil {
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"message": "From Sign UP",
