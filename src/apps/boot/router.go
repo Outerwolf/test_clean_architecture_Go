@@ -1,7 +1,7 @@
 package boot
 
 import (
-	"github.com/auth/src/config"
+	"github.com/auth/src/apps/config"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )

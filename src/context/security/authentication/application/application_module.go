@@ -1,7 +1,7 @@
 package application
 
 import (
-	sign_up "github.com/auth/src/security/auth/application/usecase/sign-up"
+	"github.com/auth/src/context/security/authentication/application/usecase/sign-up"
 	"go.uber.org/fx"
 )
 

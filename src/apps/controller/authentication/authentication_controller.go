@@ -1,8 +1,9 @@
-package auth_controller
+package authentication
 
 import (
-	"github.com/auth/src/security/auth/domain/interfaces"
+	"github.com/auth/src/context/security/authentication/domain/interfaces"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type AuthController struct {
@@ -16,24 +17,16 @@ func NewAuthController(SignUpUseCase interfaces.ISignUpUseCase[SignUpRequest]) *
 }
 
 func (ac *AuthController) SignUp(c *gin.Context) {
-	var request SignUpRequest
 
-	id := c.Param("id")
-	if id == "" {
-		c.JSON(400, gin.H{
-			"message": "Bad request",
-		})
+	var data SignUpRequest
+
+	if err := c.ShouldBindJSON(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(400, gin.H{
-			"message": "Bad request",
-		})
-		return
-	}
-	request.Id = id
 
-	ac.signUpUseCase.Execute(request)
+	ac.signUpUseCase.Execute(data)
+
 	c.JSON(200, gin.H{
 		"message": "From Sign UP",
 	})

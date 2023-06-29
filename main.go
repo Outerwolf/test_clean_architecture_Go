@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/auth/src/boot"
-	"github.com/auth/src/boot/routes"
-	"github.com/auth/src/config"
-	"github.com/auth/src/security"
+	"github.com/auth/src/apps/boot"
+	"github.com/auth/src/apps/boot/routes"
+	"github.com/auth/src/apps/config"
+	"github.com/auth/src/apps/controller"
+	"github.com/auth/src/context/security"
 	"go.uber.org/fx"
 )
 
@@ -20,6 +21,7 @@ func newFxApp() *fx.App {
 			config.NewConfiguration,
 		),
 		boot.CommonModules(),
+		controller.ApiModule(),
 		security.SecurityModule(),
 
 		fx.Invoke(

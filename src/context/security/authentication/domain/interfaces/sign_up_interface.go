@@ -1,5 +1,5 @@
 package interfaces
 
 type ISignUpUseCase[T any] interface {
-	Execute(request T)
+	Execute(request T) error
 }

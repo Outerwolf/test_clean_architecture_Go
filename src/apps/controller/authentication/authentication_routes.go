@@ -1,6 +1,8 @@
-package auth_controller
+package authentication
 
-import "github.com/auth/src/boot"
+import (
+	"github.com/auth/src/apps/boot"
+)
 
 type AuthRoutes struct {
 	handler        *boot.Router
@@ -15,5 +17,5 @@ func NewAuthRoutes(handler *boot.Router, authController *AuthController) *AuthRo
 }
 
 func (s *AuthRoutes) Setup() {
-	s.handler.PUT("/api/security/auth/sign-up/:id", s.authController.SignUp)
+	s.handler.POST("/api/security/authentication/sign-up", s.authController.SignUp)
 }
